@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Indian Restaurant Billing System</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Indian Restaurant Billing System</h1>
+            <div class="header-actions">
+                <button id="new-invoice">New Bill</button>
+                <button id="print-invoice">Print Bill</button>
+            </div>
+        </header>
+
+        <div class="main-content">
+            <div class="customer-section">
+                <h2>Customer Details</h2>
+                <div class="form-group">
+                    <label for="customer-name">Name:</label>
+                    <input type="text" id="customer-name" placeholder="Enter customer name">
+                </div>
+                <div class="form-group">
+                    <label for="customer-phone">Phone:</label>
+                    <input type="text" id="customer-phone" placeholder="Enter phone number">
+                </div>
+                <div class="form-group">
+                    <label for="customer-address">Address:</label>
+                    <textarea id="customer-address" placeholder="Enter delivery address"></textarea>
+                </div>
+            </div>
+
+            <div class="product-section">
+                <h2>Menu Items</h2>
+                <div class="product-search">
+                    <input type="text" id="product-search" placeholder="Search food items...">
+                    <button id="add-product">Add Item</button>
+                </div>
+                <div class="product-list">
+                    <table id="products-table">
+                        <thead>
+                            <tr>
+                                <th>Code</th>
+                                <th>Item Name</th>
+                                <th>Price (₹)</th>
+                                <th>Category</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody id="available-products">
+                            <!-- Food items will be added here dynamically -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <div class="invoice-section">
+                <h2>Food Bill</h2>
+                <div class="invoice-details">
+                    <div class="invoice-info">
+                        <span>Bill #: <span id="invoice-number">1001</span></span>
+                        <span>Date: <span id="invoice-date"></span></span>
+                    </div>
+                    <table id="invoice-table">
+                        <thead>
+                            <tr>
+                                <th>Item</th>
+                                <th>Price (₹)</th>
+                                <th>Qty</th>
+                                <th>Total (₹)</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody id="invoice-items">
+                            <!-- Bill items will be added here dynamically -->
+                        </tbody>
+                        <tfoot>
+                            <tr>
+                                <td colspan="3" class="text-right">Subtotal:</td>
+                                <td id="subtotal">₹0.00</td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td colspan="3" class="text-right">GST (5%):</td>
+                                <td id="tax">₹0.00</td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td colspan="3" class="text-right">Total:</td>
+                                <td id="total">₹0.00</td>
+                                <td></td>
+                            </tr>
+                        </tfoot>
+                    </table>
+                </div>
+                <div class="invoice-actions">
+                    <button id="save-invoice">Save Bill</button>
+                    <button id="clear-invoice">Clear Bill</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Food Item Modal -->
+    <div id="product-modal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2>Add New Food Item</h2>
+            <div class="form-group">
+                <label for="product-id">Item Code:</label>
+                <input type="text" id="product-id" placeholder="e.g., VEG001">
+            </div>
+            <div class="form-group">
+                <label for="product-name">Item Name:</label>
+                <input type="text" id="product-name" placeholder="e.g., Paneer Butter Masala">
+            </div>
+            <div class="form-group">
+                <label for="product-price">Price (₹):</label>
+                <input type="number" id="product-price" min="0" step="1" placeholder="e.g., 250">
+            </div>
+            <div class="form-group">
+                <label for="product-category">Category:</label>
+                <select id="product-category">
+                    <option value="Starters">Starters</option>
+                    <option value="Main Course">Main Course</option>
+                    <option value="Breads">Breads</option>
+                    <option value="Rice">Rice</option>
+                    <option value="Desserts">Desserts</option>
+                    <option value="Beverages">Beverages</option>
+                </select>
+            </div>
+            <button id="save-product">Save Item</button>
+        </div>
+    </div>
+
+    <!-- Payment Modal -->
+    <div id="payment-modal" class="modal">
+        <div class="modal-content" style="max-width: 400px;">
+            <span class="close-payment">&times;</span>
+            <h2>Payment Method</h2>
+            <div class="payment-options">
+                <button id="cash-payment" class="payment-btn">Cash Payment</button>
+                <button id="upi-payment" class="payment-btn">UPI Payment</button>
+            </div>
+            
+            <div id="upi-container" style="display: none; text-align: center; margin-top: 20px;">
+                <h3>Scan QR Code to Pay</h3>
+                <div id="qr-code" style="margin: 20px auto; padding: 10px; background: white; width: 200px;">
+                    <!-- QR code will be generated here -->
+                    <img src="https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=upi://pay?pa=yourupi@okhdfcbank&pn=Indian%20Delights%20Restaurant&am=${totalElement.textContent.substring(1)}&cu=INR" alt="UPI QR Code">
+                </div>
+                <p>Or use UPI ID: <strong>shrinathshrimangale3006@oksbi</strong></p>
+                <div id="payment-status" style="margin-top: 20px; display: none;">
+                    <div style="color: green; font-weight: bold;">✓ Payment Successful</div>
+                    <button id="done-payment" style="margin-top: 20px;">Done</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

@@ -1,0 +1,251 @@
+/* General Styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body {
+    background-color: #fff9e6;
+    color: #333;
+    line-height: 1.6;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 30px;
+    padding-bottom: 20px;
+    border-bottom: 2px solid #ff9933;
+}
+
+h1, h2 {
+    color: #cc3300;
+}
+
+button {
+    padding: 8px 16px;
+    background-color: #ff9933;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 14px;
+    transition: background-color 0.3s;
+}
+
+button:hover {
+    background-color: #e68a00;
+}
+
+.header-actions button {
+    margin-left: 10px;
+}
+
+/* Form Styles */
+.form-group {
+    margin-bottom: 15px;
+}
+
+label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: 600;
+    color: #993300;
+}
+
+input[type="text"],
+input[type="email"],
+input[type="number"],
+textarea,
+select {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #ffcc99;
+    border-radius: 4px;
+    font-size: 14px;
+    background-color: #fff5e6;
+}
+
+textarea {
+    height: 80px;
+    resize: vertical;
+}
+
+/* Main Content Layout */
+.main-content {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-gap: 20px;
+}
+
+.customer-section {
+    grid-column: 1;
+    background: white;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    border: 1px solid #ffcc99;
+}
+
+.product-section {
+    grid-column: 2;
+    grid-row: 1;
+    background: white;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    border: 1px solid #ffcc99;
+}
+
+.invoice-section {
+    grid-column: 1 / span 2;
+    background: white;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    margin-top: 20px;
+    border: 1px solid #ffcc99;
+}
+
+/* Product Search */
+.product-search {
+    display: flex;
+    margin-bottom: 15px;
+}
+
+.product-search input {
+    flex: 1;
+    margin-right: 10px;
+}
+
+/* Table Styles */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 15px;
+}
+
+th, td {
+    padding: 10px;
+    text-align: left;
+    border-bottom: 1px solid #ffcc99;
+}
+
+th {
+    background-color: #ffe6cc;
+    font-weight: 600;
+    color: #993300;
+}
+
+tr:hover {
+    background-color: #fff5e6;
+}
+
+.text-right {
+    text-align: right;
+}
+
+/* Invoice Actions */
+.invoice-actions {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 20px;
+}
+
+.invoice-actions button {
+    margin-left: 10px;
+}
+
+.invoice-info {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 15px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid #ffcc99;
+}
+
+/* Modal Styles */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0,0,0,0.4);
+}
+
+.modal-content {
+    background-color: #fff9e6;
+    margin: 15% auto;
+    padding: 20px;
+    border: 1px solid #ff9933;
+    width: 80%;
+    max-width: 500px;
+    border-radius: 8px;
+}
+
+.close, .close-payment {
+    color: #993300;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.close:hover, .close-payment:hover {
+    color: #cc3300;
+}
+
+/* Payment Modal Styles */
+.payment-options {
+    display: flex;
+    justify-content: space-between;
+    margin: 20px 0;
+}
+
+.payment-btn {
+    width: 48%;
+    padding: 15px;
+    font-size: 16px;
+    background-color: #4CAF50;
+}
+
+.payment-btn:hover {
+    background-color: #45a049;
+}
+
+#cash-payment {
+    background-color: #ff9933;
+}
+
+#cash-payment:hover {
+    background-color: #e68a00;
+}
+
+/* Responsive Styles */
+@media (max-width: 768px) {
+    .main-content {
+        grid-template-columns: 1fr;
+    }
+    
+    .product-section {
+        grid-column: 1;
+        grid-row: 2;
+    }
+    
+    .invoice-section {
+        grid-column: 1;
+    }
+}
